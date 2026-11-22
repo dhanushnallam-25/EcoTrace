@@ -1,0 +1,4 @@
+I,k,heap_topk_ms,sort_topk_ms,heap_insert+peek_us,resort_insert+peek_us,same_topk,heap_valid
+1000,10,2.205,0.207,25.17,188.33,True,True
+10000,10,22.577,2.893,48.33,3532.9,True,True
+100000,10,239.275,34.85,46.13,34410.77,True,True

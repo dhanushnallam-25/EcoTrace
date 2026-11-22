@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Generated at run time (re-created by the pipeline)
+data/processed/*.parquet
+data/processed/response_log.json
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Large source archive (download separately — see README)
+files/HydroRIVERS_v10_as.gdb.zip

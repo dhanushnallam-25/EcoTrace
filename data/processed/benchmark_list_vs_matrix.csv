@@ -1,0 +1,5 @@
+V,E,list_memory_KB,matrix_memory_KB,list_neighbor_us,matrix_neighbor_us,list_bfs_ms,matrix_bfs_ms,same_reachable_set,reachable
+100,148,10.9,88.9,0.084,3.794,0.05,0.318,True,100
+500,747,48.8,2003.9,0.079,19.463,0.222,8.362,True,500
+1000,1497,97.5,7925.4,0.114,40.015,0.506,36.786,True,1000
+2000,2999,194.8,31485.2,0.131,86.963,1.022,147.275,True,2000

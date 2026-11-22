@@ -1,0 +1,4 @@
+table,slno,station,timestamp,parameter,raw_value,reason
+chemical,2300,RAMAMMANA KERE,2021-08-09 08:30:00,ammonia_n,0.41.83,malformed numeric string
+chemical,2300,RAMAMMANA KERE,2021-08-09 08:30:00,do,3.16.2,malformed numeric string
+chemical,2300,RAMAMMANA KERE,2021-08-09 08:30:00,ph,78.2,"outside physically possible range [0.0, 14.0]"

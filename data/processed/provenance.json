@@ -1,0 +1,151 @@
+{
+  "generated": "2026-11-22T14:14:55",
+  "sources": {
+    "biological": "swq_biological_parameter_manual_cpcb_ka_2021_2025.csv",
+    "chemical": "swq_chemical_parameter_manual_cpcb_ka_2021_2025 (1).csv",
+    "hydrorivers": "HydroRIVERS_v10_as.gdb.zip",
+    "physical": null
+  },
+  "labels": {
+    "records_clean.csv": "Processed government data (CPCB manual surface-water monitoring, Karnataka)",
+    "stations.csv": "Derived: station registry; type inferred from station name; snapping from HydroRIVERS v1.0",
+    "river_edges.csv": "Derived: edges from HydroRIVERS NEXT_DOWN topology (not verified by field survey)",
+    "quarantine.csv": "Raw source values excluded as malformed or physically impossible",
+    "incidents.csv": "Derived screening flags (not regulatory findings)"
+  },
+  "processing": [
+    "read CSV as raw strings",
+    "schema auto-mapping",
+    "day-first date parsing",
+    "numeric coercion + quarantine of malformed strings",
+    "physical-plausibility quarantine",
+    "dedup on (station, timestamp, lat, lon)",
+    "one-to-one outer merge chemical+biological",
+    "HydroRIVERS clip to bbox (lon_min, lat_min, lon_max, lat_max) = (74.0, 11.5, 78.6, 18.5)",
+    "snap river stations <= 1.5 km"
+  ],
+  "audit": {
+    "tables": {
+      "chemical": {
+        "raw_rows": 3019,
+        "rows_after_cleaning": 3019,
+        "rejected": 0,
+        "duplicates_removed": 0,
+        "quarantined_values": 3
+      },
+      "biological": {
+        "raw_rows": 3019,
+        "rows_after_cleaning": 3019,
+        "rejected": 0,
+        "duplicates_removed": 0,
+        "quarantined_values": 0
+      }
+    },
+    "merged_records": 3019,
+    "stations": 269,
+    "unique_station_timestamp_keys": 3004,
+    "same_station_timestamp_different_coordinates": 15,
+    "date_min": "2021-01-01 08:30:00",
+    "date_max": "2021-12-31 08:30:00",
+    "quarantined_values": 3,
+    "rejected_rows": 0,
+    "duplicates_removed": 0,
+    "active_params": [
+      "ph",
+      "bod",
+      "do",
+      "total_coliform",
+      "ammonia_n",
+      "fecal_coliform"
+    ],
+    "unmeasured_params": [
+      "arsenic",
+      "bicarbonate",
+      "boron",
+      "cod",
+      "cadmium",
+      "calcium",
+      "carbonate",
+      "chloride",
+      "chromium",
+      "copper",
+      "fluoride",
+      "hardness_calcium",
+      "hardness_magnesium",
+      "iron",
+      "lead",
+      "magnesium",
+      "manganese",
+      "mercury",
+      "nickel",
+      "nitrate",
+      "nitrate_n",
+      "nitrite_n_nitrate_n",
+      "potassium",
+      "sodium",
+      "sodium_adsorption_ratio",
+      "sulphate",
+      "total_alkalinity",
+      "total_dissolved_solids",
+      "total_hardness",
+      "total_phosphorus",
+      "zinc"
+    ],
+    "zero_filled_values": 0
+  },
+  "config": {
+    "snap_distance_km": 1.5,
+    "active_param_min_coverage": 0.1,
+    "high_priority_threshold": 60.0,
+    "downstream_saturation": 5,
+    "modified_z_threshold": 3.5,
+    "iqr_multiplier": 1.5,
+    "min_obs_for_anomaly": 4,
+    "snap_lake_stations": false,
+    "weights": {
+      "anomaly": 0.15,
+      "data_quality": 0.1,
+      "downstream_reach": 0.2,
+      "persistence": 0.2,
+      "severity": 0.35
+    },
+    "thresholds": {
+      "ammonia_n": {
+        "basis": "CPCB DBU Class D: free NH3-N \u2264 1.2 mg/L (screening proxy)",
+        "full_severity_ratio": 5.0,
+        "max": 1.2,
+        "type": "max"
+      },
+      "bod": {
+        "basis": "CPCB DBU Class B/C: BOD \u2264 3 mg/L",
+        "full_severity_ratio": 5.0,
+        "max": 3.0,
+        "type": "max"
+      },
+      "do": {
+        "basis": "CPCB DBU Class B: DO \u2265 5 mg/L",
+        "min": 5.0,
+        "type": "min"
+      },
+      "fecal_coliform": {
+        "basis": "CPCB bathing criteria: Fecal Coliform \u2264 2500 MPN/100 mL (max permissible)",
+        "full_severity_ratio": 1000.0,
+        "max": 2500.0,
+        "type": "max"
+      },
+      "ph": {
+        "basis": "CPCB DBU Class B/D: pH 6.5\u20138.5",
+        "full_severity_delta": 1.5,
+        "max": 8.5,
+        "min": 6.5,
+        "type": "range"
+      },
+      "total_coliform": {
+        "basis": "CPCB DBU Class C: Total Coliform \u2264 5000 MPN/100 mL",
+        "full_severity_ratio": 1000.0,
+        "max": 5000.0,
+        "type": "max"
+      }
+    }
+  }
+}
